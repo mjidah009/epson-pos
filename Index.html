@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EPSON BLUE PRO MAX — Cloud Sync</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Fira+Code:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+/* ================================================================
+   RESET & ROOT VARIABLES
+================================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg-deep:       #03080f;
+  --bg-panel:      #060e1c;
+  --bg-card:       #09152a;
+  --bg-card2:      #0c1c35;
+  --bg-input:      #0e1f38;
+  --border:        #162d4a;
+  --border-hi:     #1e4066;
+  --accent:        #0ea5e9;
+  --accent2:       #22d3ee;
+  --green:         #10b981;
+  --green2:        #34d399;
+  --amber:         #f59e0b;
+  --amber2:        #fcd34d;
+  --rose:          #f43f5e;
+  --rose2:         #fb7185;
+  --violet:        #8b5cf6;
+  --text-hi:       #ddeeff;
+  --text-mid:      #6a9cbf;
+  --text-lo:       #2e5070;
+  --btn-print:     #0a2660;
+  --btn-print-h:   #1448b0;
+  --btn-copy:      #073322;
+  --btn-copy-h:    #115c3c;
+  --btn-scan:      #302000;
+  --btn-scan-h:    #664400;
+  --btn-lain:      #30081a;
+  --btn-lain-h:    #641430;
+  --btn-rpt:       #120840;
+  --btn-rpt-h:     #261472;
+  --btn-rpt2:      #081a0e;
+  --btn-rpt2-h:    #12381c;
+  --btn-rpt3:      #241200;
+  --btn-rpt3-h:    #4a2600;
+  --radius:        8px;
+  --radius-lg:     14px;
+  --shadow:        0 6px 32px rgba(0,0,0,0.6);
+  --glow-blue:     0 0 24px rgba(14,165,233,0.28);
+  --glow-green:    0 0 24px rgba(16,185,129,0.28);
+  --glow-amber:    0 0 24px rgba(245,158,11,0.28);
+  --glow-rose:     0 0 24px rgba(244,63,94,0.28);
+  --t:             0.18s cubic-bezier(0.4,0,0.2,1);
+}
+
+html,body{height:100%}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg-deep);
+  color:var(--text-hi);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ================================================================
+   SCROLLBAR
+================================================================ */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg-deep)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+
+/* ================================================================
+   ANIMATED BACKGROUND
+================================================================ */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:radial-gradient(circle,rgba(14,165,233,0.055) 1px,transparent 1px);
+  background-size:32px 32px;
+  pointer-events:none;z-index:0;
+}
+body::after{
+  content:'';
+  position:fixed;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(14,100,200,0.08) 0%,transparent 70%);
+  pointer-events:none;z-index:0;
+}
+
+.app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100vh}
+
+/* ================================================================
+   HEADER
+================================================================ */
+.header{
+  position:sticky;top:0;z-index:200;
+  background:rgba(6,14,28,0.97);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  padding:0 24px;height:66px;
+  display:flex;align-items:center;justify-content:space-between;
+  box-shadow:0 2px 40px rgba(0,0,0,0.7);
+}
+.header::after{
+  content:'';
+  position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent 0%,var(--accent) 20%,var(--accent2) 50%,var(--accent) 80%,transparent 100%);
+  animation:hdr-glow 4s ease-in-out infinite;
+}
+@keyframes hdr-glow{0%,100%{opacity:.35}50%{opacity:1}}
+
+.logo-area{display:flex;align-items:center;gap:14px}
+.logo-icon{
+  width:42px;height:42px;border-radius:11px;
+  background:linear-gradient(135deg,#0369a1,var(--accent2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;box-shadow:var(--glow-blue);flex-shrink:0;
+  position:relative;overflow:hidden;
+}
+.logo-icon::after{
+  content:'';
+  position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+  background:linear-gradient(45deg,transparent 30%,rgba(255,255,255,.15) 50%,transparent 70%);
+  animation:shine 5s ease-in-out infinite;
+}
+@keyframes shine{0%,85%,100%{transform:translateX(-100%) translateY(-100%) rotate(45deg)}90%{transform:translateX(100%) translateY(100%) rotate(45deg)}}
+
+.logo-text h1{
+  font-family:'Rajdhani',sans-serif;
+  font-size:19px;font-weight:700;letter-spacing:2px;
+  color:var(--text-hi);line-height:1.1;
+}
+.logo-text .sub{
+  font-family:'Fira Code',monospace;
+  font-size:9px;color:var(--text-lo);letter-spacing:3px;text-transform:uppercase;
+}
+
+.header-right{display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+#clock{
+  font-family:'Fira Code',monospace;font-size:16px;font-weight:500;
+  color:var(--accent2);letter-spacing:1px;
+}
+.sync-badge{
+  display:flex;align-items:center;gap:5px;
+  font-family:'Fira Code',monospace;font-size:9px;color:var(--text-lo);
+}
+.sync-dot{
+  width:6px;height:6px;border-radius:50%;background:var(--amber);
+  transition:background .4s;
+  animation:pdot 2s ease-in-out infinite;
+}
+@keyframes pdot{0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,.5)}50%{box-shadow:0 0 0 4px rgba(16,185,129,0)}}
+
+/* ================================================================
+   MAIN
+================================================================ */
+.main{flex:1;padding:14px 20px 18px}
+
+/* ================================================================
+   STAT CARDS
+================================================================ */
+.stats-row{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:10px;margin-bottom:12px;
+  animation:fadeUp .5s ease both;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+.scard{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:14px 18px;
+  display:flex;align-items:center;gap:14px;
+  transition:var(--t);cursor:default;position:relative;overflow:hidden;
+}
+.scard::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;transition:var(--t);
+}
+.scard.sc-blue::before  {background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.scard.sc-green::before {background:linear-gradient(90deg,var(--green),var(--green2))}
+.scard.sc-amber::before {background:linear-gradient(90deg,var(--amber),var(--amber2))}
+.scard:hover{border-color:var(--border-hi);transform:translateY(-2px)}
+.scard.sc-blue:hover  {box-shadow:var(--glow-blue)}
+.scard.sc-green:hover {box-shadow:var(--glow-green)}
+.scard.sc-amber:hover {box-shadow:var(--glow-amber)}
+
+.scard-icon{
+  width:46px;height:46px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;
+}
+.sc-blue  .scard-icon{background:rgba(14,165,233,.12)}
+.sc-green .scard-icon{background:rgba(16,185,129,.12)}
+.sc-amber .scard-icon{background:rgba(245,158,11,.12)}
+
+.scard-label{
+  font-size:9px;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;
+  color:var(--text-lo);margin-bottom:5px;
+}
+.scard-val{font-family:'Fira Code',monospace;font-size:20px;font-weight:500;line-height:1}
+.sc-blue  .scard-val{color:var(--accent2)}
+.sc-green .scard-val{color:var(--green2)}
+.sc-amber .scard-val{color:var(--amber2)}
+
+/* ================================================================
+   MID ROW
+================================================================ */
+.mid-row{
+  display:grid;grid-template-columns:1fr 1.3fr;
+  gap:10px;margin-bottom:14px;
+  animation:fadeUp .5s .08s ease both;
+}
+
+/* ================================================================
+   PANEL CARD
+================================================================ */
+.panel{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.panel-hdr{
+  background:rgba(255,255,255,.02);border-bottom:1px solid var(--border);
+  padding:9px 16px;
+  font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;color:var(--text-mid);
+  display:flex;align-items:center;gap:8px;
+}
+.panel-body{padding:14px 16px}
+
+/* ================================================================
+   FORM ELEMENTS
+================================================================ */
+.field-lbl{
+  display:block;font-size:9px;font-weight:600;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--text-lo);margin-bottom:5px;
+}
+input[type=text],input[type=number]{
+  width:100%;background:var(--bg-input);border:1px solid var(--border);
+  border-radius:var(--radius);color:var(--text-hi);
+  font-family:'DM Sans',sans-serif;font-size:13px;
+  padding:9px 12px;outline:none;transition:var(--t);margin-bottom:10px;
+  -webkit-appearance:none;appearance:none;
+}
+input[type=text]:focus,input[type=number]:focus{
+  border-color:var(--accent);box-shadow:0 0 0 3px rgba(14,165,233,.13);
+}
+input::placeholder{color:var(--text-lo)}
+
+/* ================================================================
+   BUTTONS
+================================================================ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  padding:9px 16px;border:1px solid transparent;border-radius:var(--radius);
+  font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;
+  cursor:pointer;transition:var(--t);letter-spacing:.3px;
+  white-space:nowrap;position:relative;overflow:hidden;user-select:none;
+  width:100%;margin-bottom:6px;
+}
+.btn:last-child{margin-bottom:0}
+.btn:active{transform:scale(.97)!important}
+.btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0);transition:var(--t)}
+.btn:hover::after{background:rgba(255,255,255,.05)}
+.btn::before{
+  content:'';position:absolute;
+  top:0;left:-100%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent);
+  transition:left .4s ease;pointer-events:none;
+}
+.btn:hover::before{left:140%}
+
+.btn-manual {background:var(--bg-card2);color:var(--text-hi);border-color:rgba(34,211,238,.2)}
+.btn-manual:hover{background:#0e2444;border-color:var(--accent2);transform:translateY(-1px)}
+
+.btn-rpt1{background:var(--btn-rpt); color:var(--text-hi);border-color:rgba(139,92,246,.18)}
+.btn-rpt1:hover{background:var(--btn-rpt-h); border-color:var(--violet);box-shadow:0 0 16px rgba(139,92,246,.2);transform:translateY(-1px)}
+
+.btn-rpt2{background:var(--btn-rpt2);color:var(--text-hi);border-color:rgba(16,185,129,.18)}
+.btn-rpt2:hover{background:var(--btn-rpt2-h);border-color:var(--green);box-shadow:0 0 16px rgba(16,185,129,.2);transform:translateY(-1px)}
+
+.btn-rpt3{background:var(--btn-rpt3);color:var(--text-hi);border-color:rgba(245,158,11,.18)}
+.btn-rpt3:hover{background:var(--btn-rpt3-h);border-color:var(--amber);box-shadow:0 0 16px rgba(245,158,11,.2);transform:translateY(-1px)}
+
+.btn-print{background:var(--btn-print);color:var(--text-hi);border-color:rgba(14,165,233,.15)}
+.btn-print:hover{background:var(--btn-print-h);border-color:var(--accent);box-shadow:var(--glow-blue); transform:translateY(-2px)}
+
+.btn-copy {background:var(--btn-copy); color:var(--text-hi);border-color:rgba(16,185,129,.15)}
+.btn-copy:hover {background:var(--btn-copy-h); border-color:var(--green);box-shadow:var(--glow-green);transform:translateY(-2px)}
+
+.btn-scan {background:var(--btn-scan); color:var(--text-hi);border-color:rgba(245,158,11,.15)}
+.btn-scan:hover {background:var(--btn-scan-h); border-color:var(--amber);box-shadow:var(--glow-amber);transform:translateY(-2px)}
+
+.btn-lain {background:var(--btn-lain); color:var(--text-hi);border-color:rgba(244,63,94,.15)}
+.btn-lain:hover {background:var(--btn-lain-h); border-color:var(--rose); box-shadow:var(--glow-rose); transform:translateY(-2px)}
+
+/* ================================================================
+   DIVIDER
+================================================================ */
+.divider{height:1px;background:var(--border);margin:8px 0 14px;position:relative}
+.divider::after{content:'';position:absolute;left:0;top:0;width:100px;height:1px;background:linear-gradient(90deg,var(--accent),transparent)}
+
+/* ================================================================
+   SERVICE SECTIONS
+================================================================ */
+.svc{margin-bottom:10px;animation:fadeUp .5s ease both}
+.svc:nth-child(2){animation-delay:.10s}
+.svc:nth-child(3){animation-delay:.16s}
+.svc:nth-child(4){animation-delay:.22s}
+.svc:nth-child(5){animation-delay:.28s}
+
+.svc-hdr{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+.svc-bar{width:3px;height:20px;border-radius:2px;flex-shrink:0}
+.svc-bar.blue {background:linear-gradient(180deg,var(--accent),var(--accent2));box-shadow:var(--glow-blue)}
+.svc-bar.green{background:linear-gradient(180deg,var(--green),var(--green2)); box-shadow:var(--glow-green)}
+.svc-bar.amber{background:linear-gradient(180deg,var(--amber),var(--amber2)); box-shadow:var(--glow-amber)}
+.svc-bar.rose {background:linear-gradient(180deg,var(--rose),var(--rose2));  box-shadow:var(--glow-rose)}
+
+.svc-name{font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-mid)}
+
+.svc-grid{display:grid;gap:7px}
+.grid-5{grid-template-columns:repeat(5,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.svc-btn{padding:13px 6px;font-size:11.5px;text-align:center;border-radius:var(--radius);margin-bottom:0;line-height:1.25}
+
+/* ================================================================
+   MODAL OVERLAY
+================================================================ */
+.overlay{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(3,8,15,.88);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .22s ease;
+}
+.overlay.open{opacity:1;pointer-events:all}
+
+.modal{
+  background:var(--bg-card2);border:1px solid var(--border-hi);
+  border-radius:var(--radius-lg);width:450px;max-width:95vw;
+  box-shadow:0 30px 80px rgba(0,0,0,.8),var(--glow-blue);
+  transform:translateY(22px) scale(.97);
+  transition:transform .26s cubic-bezier(.34,1.56,.64,1);
+  overflow:hidden;
+}
+.overlay.open .modal{transform:translateY(0) scale(1)}
+
+.modal-hdr{
+  background:linear-gradient(135deg,#081e48,#0c2d6b);
+  border-bottom:1px solid var(--border);padding:16px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.modal-title{font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;letter-spacing:1px;display:flex;align-items:center;gap:9px}
+.modal-close{
+  background:rgba(255,255,255,.06);border:1px solid var(--border);
+  border-radius:6px;color:var(--text-mid);width:30px;height:30px;
+  font-size:16px;cursor:pointer;transition:var(--t);
+  display:flex;align-items:center;justify-content:center;
+}
+.modal-close:hover{background:rgba(244,63,94,.18);color:var(--rose);border-color:var(--rose)}
+
+.modal-body{padding:20px}
+
+.price-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(14,165,233,.09);border:1px solid rgba(14,165,233,.25);
+  border-radius:20px;padding:4px 14px;margin-bottom:16px;
+  font-family:'Fira Code',monospace;font-size:12px;color:var(--accent2);
+}
+.modal .field-lbl{margin-top:4px}
+.modal input{margin-bottom:12px}
+
+.result-box{
+  background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.2);
+  border-radius:var(--radius);padding:12px 16px;margin-top:6px;display:none;
+}
+.result-row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px;color:var(--text-mid)}
+.result-row:last-child{margin-bottom:0;font-size:15px;font-weight:700;color:var(--text-hi);border-top:1px solid var(--border);padding-top:8px;margin-top:4px}
+.result-row span:last-child{font-family:'Fira Code',monospace;color:var(--green2)}
+
+.btn-process{
+  background:linear-gradient(135deg,#0a52b8,var(--accent));
+  color:#fff;border:none;font-size:13px;font-weight:700;
+  padding:12px;border-radius:var(--radius);margin-top:14px;
+  letter-spacing:.5px;box-shadow:0 4px 20px rgba(14,165,233,.25);
+}
+.btn-process:hover{background:linear-gradient(135deg,#1060c8,#38b4f7);box-shadow:0 6px 28px rgba(14,165,233,.4);transform:translateY(-1px)}
+.btn-process:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+
+/* ================================================================
+   REPORT MODAL
+================================================================ */
+.rpt-modal{width:560px;max-height:82vh;display:flex;flex-direction:column}
+.rpt-modal .modal-body{overflow-y:auto;flex:1}
+
+.rpt-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+.rpt-table th{
+  background:rgba(14,165,233,.1);border:1px solid var(--border);
+  padding:8px 10px;text-align:left;font-family:'Rajdhani',sans-serif;
+  font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--accent2);
+}
+.rpt-table td{border:1px solid var(--border);padding:8px 10px;color:var(--text-mid);font-size:12px}
+.rpt-table tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.rpt-table .amt{font-family:'Fira Code',monospace;color:var(--green2);text-align:right}
+
+.rpt-total{
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(14,165,233,.08);border:1px solid rgba(14,165,233,.2);
+  border-radius:var(--radius);padding:12px 16px;margin-top:14px;
+  font-weight:700;font-size:15px;
+}
+.rpt-total span{font-family:'Fira Code',monospace;color:var(--accent2);font-size:18px}
+.rpt-meta{display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.rpt-badge{
+  background:rgba(14,165,233,.08);border:1px solid rgba(14,165,233,.18);
+  border-radius:20px;padding:3px 12px;
+  font-family:'Fira Code',monospace;font-size:11px;color:var(--text-mid);
+}
+.rpt-empty{text-align:center;padding:30px;color:var(--text-lo);font-size:13px}
+
+/* ================================================================
+   TOAST NOTIFICATIONS
+================================================================ */
+#toasts{
+  position:fixed;top:78px;right:18px;z-index:9999;
+  display:flex;flex-direction:column;gap:8px;
+  pointer-events:none;
+}
+.toast{
+  background:var(--bg-card2);border:1px solid var(--border);
+  border-radius:var(--radius);padding:12px 16px;
+  min-width:260px;max-width:340px;
+  display:flex;align-items:flex-start;gap:10px;
+  box-shadow:var(--shadow);animation:tIn .28s cubic-bezier(.34,1.56,.64,1);
+  transition:opacity .25s,transform .25s;pointer-events:all;
+}
+@keyframes tIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}
+.toast.out{opacity:0;transform:translateX(18px)}
+.toast.t-ok   {border-left:3px solid var(--green)}
+.toast.t-err  {border-left:3px solid var(--rose)}
+.toast.t-warn {border-left:3px solid var(--amber)}
+.toast.t-info {border-left:3px solid var(--accent)}
+.toast-ico{font-size:18px;flex-shrink:0;margin-top:1px}
+.toast-txt{font-size:12.5px;line-height:1.45;color:var(--text-hi)}
+.toast-title{font-weight:700;font-size:13px;margin-bottom:2px}
+
+/* ================================================================
+   STATUS BAR
+================================================================ */
+.statusbar{
+  background:rgba(6,14,28,.95);border-top:1px solid var(--border);
+  padding:5px 24px;display:flex;align-items:center;justify-content:space-between;
+  font-family:'Fira Code',monospace;font-size:9px;color:var(--text-lo);
+}
+.sb-live{color:var(--green);display:flex;align-items:center;gap:5px}
+.sb-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pdot 2s ease-in-out infinite}
+
+/* ================================================================
+   RESPONSIVE
+================================================================ */
+@media(max-width:900px){
+  .stats-row{grid-template-columns:1fr 1fr}
+  .stats-row .scard:last-child{grid-column:1/-1}
+  .grid-5{grid-template-columns:repeat(3,1fr)}
+  .mid-row{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .stats-row{grid-template-columns:1fr}
+  .stats-row .scard:last-child{grid-column:auto}
+  .grid-5,.grid-3{grid-template-columns:1fr 1fr}
+  .grid-2{grid-template-columns:1fr 1fr}
+  .main{padding:10px 12px}
+  .header{padding:0 14px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ═══════════════════ HEADER ═══════════════════ -->
+  <header class="header">
+    <div class="logo-area">
+      <div class="logo-icon">🖨️</div>
+      <div class="logo-text">
+        <h1>EPSON BLUE PRO MAX</h1>
+        <div class="sub">CLOUD SYNC &nbsp;·&nbsp; POS MANAGEMENT SYSTEM</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div id="clock">--:--:--</div>
+      <div class="sync-badge">
+        <div class="sync-dot" id="syncDot"></div>
+        <span id="syncLabel">Connecting...</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════ MAIN ═══════════════════ -->
+  <main class="main">
+
+    <!-- STAT CARDS -->
+    <div class="stats-row">
+      <div class="scard sc-blue">
+        <div class="scard-icon">💰</div>
+        <div>
+          <div class="scard-label">Today's Income</div>
+          <div class="scard-val" id="statIncome">RM 0.00</div>
+        </div>
+      </div>
+      <div class="scard sc-green">
+        <div class="scard-icon">📦</div>
+        <div>
+          <div class="scard-label">LAIN Income</div>
+          <div class="scard-val" id="statLain">RM 0.00</div>
+        </div>
+      </div>
+      <div class="scard sc-amber">
+        <div class="scard-icon">🆔</div>
+        <div>
+          <div class="scard-label">Transaksi Hari Ini</div>
+          <div class="scard-val" id="statCount">0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MID ROW -->
+    <div class="mid-row">
+
+      <!-- Manual Income -->
+      <div class="panel">
+        <div class="panel-hdr">✏️ &nbsp;MANUAL INCOME</div>
+        <div class="panel-body">
+          <label class="field-lbl">Masukkan Manual Income (RM)</label>
+          <input type="number" id="manualInput" placeholder="0.00" min="0" step="0.01" />
+          <button class="btn btn-manual" onclick="updateManual()">
+            💰 &nbsp;UPDATE MANUAL INCOME
+          </button>
+        </div>
+      </div>
+
+      <!-- Tools & Reports -->
+      <div class="panel">
+        <div class="panel-hdr">📊 &nbsp;TOOLS &amp; REPORTS</div>
+        <div class="panel-body">
+          <button class="btn btn-rpt1" onclick="monthlyReportPopup()">
+            📊 &nbsp;Monthly Report (Popup)
+          </button>
+          <button class="btn btn-rpt2" onclick="dailyReportPDF()">
+            📋 &nbsp;Daily Report Harian (PDF)
+          </button>
+          <button class="btn btn-rpt3" onclick="monthlyReportPDF()">
+            📅 &nbsp;Monthly Report Bulanan (PDF)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="divider"></div>
+
+    <!-- PRINTING -->
+    <div class="svc">
+      <div class="svc-hdr">
+        <div class="svc-bar blue"></div>
+        <div class="svc-name">🖨️ &nbsp;PRINTING</div>
+      </div>
+      <div class="svc-grid grid-5">
+        <button class="btn btn-print svc-btn" onclick="openModal('print_bw','Printing B/W')">Printing<br>B/W</button>
+        <button class="btn btn-print svc-btn" onclick="openModal('print_color','Printing Color')">Printing<br>Color</button>
+        <button class="btn btn-print svc-btn" onclick="openModal('print_full','Print Full Gambar')">Print Full<br>Gambar</button>
+        <button class="btn btn-print svc-btn" onclick="openModal('print_ic_color','Print IC Color')">Print IC<br>Color</button>
+        <button class="btn btn-print svc-btn" onclick="openModal('print_ic_bw','Print IC B/W')">Print IC<br>B/W</button>
+      </div>
+    </div>
+
+    <!-- PHOTOCOPY -->
+    <div class="svc">
+      <div class="svc-hdr">
+        <div class="svc-bar green"></div>
+        <div class="svc-name">📄 &nbsp;PHOTOCOPY</div>
+      </div>
+      <div class="svc-grid grid-5">
+        <button class="btn btn-copy svc-btn" onclick="openModal('copy_bw','Photocopy B/W')">Photocopy<br>B/W</button>
+        <button class="btn btn-copy svc-btn" onclick="openModal('copy_color','Photocopy Color')">Photocopy<br>Color</button>
+        <button class="btn btn-copy svc-btn" onclick="openModal('copy_ic_color','Copy IC Color')">Copy IC<br>Color</button>
+        <button class="btn btn-copy svc-btn" onclick="openModal('copy_ic_bw','Copy IC B/W')">Copy IC<br>B/W</button>
+        <button class="btn btn-copy svc-btn" onclick="openModal('copy_full','Copy Full Gambar')">Copy Full<br>Gambar</button>
+      </div>
+    </div>
+
+    <!-- SCAN -->
+    <div class="svc">
+      <div class="svc-hdr">
+        <div class="svc-bar amber"></div>
+        <div class="svc-name">🔍 &nbsp;SCAN</div>
+      </div>
+      <div class="svc-grid grid-3">
+        <button class="btn btn-scan svc-btn" onclick="openModal('scan_img','Scan Image')">Scan Image</button>
+        <button class="btn btn-scan svc-btn" onclick="openModal('scan_word','Scan Word')">Scan Word</button>
+        <button class="btn btn-scan svc-btn" onclick="openModal('scan_pdf','Scan PDF')">Scan PDF</button>
+      </div>
+    </div>
+
+    <!-- LAMINATE & BINDING -->
+    <div class="svc">
+      <div class="svc-hdr">
+        <div class="svc-bar rose"></div>
+        <div class="svc-name">📎 &nbsp;LAMINATE &amp; BINDING</div>
+      </div>
+      <div class="svc-grid grid-2">
+        <button class="btn btn-lain svc-btn" onclick="openModal('laminate','Laminate')">Laminate</button>
+        <button class="btn btn-lain svc-btn" onclick="openModal('binding','Binding')">Binding</button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ═══════════════════ STATUS BAR ═══════════════════ -->
+  <footer class="statusbar">
+    <span>EPSON BLUE PRO MAX &nbsp;·&nbsp; v3.0 &nbsp;·&nbsp; Supabase Cloud Edition</span>
+    <div style="display:flex;gap:18px;align-items:center">
+      <span id="sbSync">Last sync: —</span>
+      <span class="sb-live"><div class="sb-dot"></div>LIVE</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════ SERVICE MODAL ═══════════════════ -->
+<div class="overlay" id="svcOverlay" onclick="overlayBgClick(event,'svcOverlay',closeModal)">
+  <div class="modal" id="svcModal">
+    <div class="modal-hdr">
+      <div class="modal-title" id="modalTitle">Service</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="price-tag" id="priceTag">💰 Harga: RM —</div>
+      <label class="field-lbl">Nama Pelanggan</label>
+      <input type="text" id="fCustomer" placeholder="Nama pelanggan..." />
+      <label class="field-lbl">Kuantiti</label>
+      <input type="number" id="fQty" placeholder="1" min="1" step="1" value="1" oninput="calcPreview()" />
+      <label class="field-lbl">Jumlah Dibayar (RM)</label>
+      <input type="number" id="fPaid" placeholder="0.00" min="0" step="0.01" oninput="calcPreview()" />
+      <div class="result-box" id="resultBox">
+        <div class="result-row"><span>Jumlah Perlu:</span><span id="resTotal">—</span></div>
+        <div class="result-row"><span>Dibayar:</span><span id="resPaid">—</span></div>
+        <div class="result-row"><span>💰 Baki:</span><span id="resBaki">—</span></div>
+      </div>
+      <button class="btn btn-process" id="btnProcess" onclick="processTransaction()">
+        ⚡ &nbsp;PROSES TRANSAKSI
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ REPORT MODAL ═══════════════════ -->
+<div class="overlay" id="rptOverlay" onclick="overlayBgClick(event,'rptOverlay',closeRpt)">
+  <div class="modal rpt-modal" id="rptModal">
+    <div class="modal-hdr">
+      <div class="modal-title" id="rptTitle">Report</div>
+      <button class="modal-close" onclick="closeRpt()">✕</button>
+    </div>
+    <div class="modal-body" id="rptBody"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════ TOAST CONTAINER ═══════════════════ -->
+<div id="toasts"></div>
+
+<script>
+'use strict';
+
+/* ================================================================
+   SUPABASE CONFIGURATION - UPDATED & FIXED
+   ================================================================ */
+const SUPABASE_URL = 'https://cynzhzczavtlebbcsjad.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5bnpoemN6YXZ0bGViYmNzamFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2NjUxMTQsImV4cCI6MjA5MjI0MTExNH0.kl3XvLeF1gna17MW1YpOHWnEd_PQR9POrXxlSnmrsB8';
+
+const HEADERS = {
+  'apikey': SUPABASE_ANON_KEY,
+  'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+  'Content-Type': 'application/json'
+};
+
+const POST_HEADERS = Object.assign({}, HEADERS, { 'Prefer': 'return=minimal' });
+
+/* ================================================================
+   PRICING TABLE
+   ================================================================ */
+const PRICING = {
+  print_bw: 0.15,
+  print_color: 0.60,
+  copy_bw: 0.20,
+  copy_color: 0.50,
+  laminate: 2.00,
+  binding: 2.00,
+  print_full: 0.90,
+  print_ic_color: 1.20,
+  print_ic_bw: 1.00,
+  copy_ic_color: 1.00,
+  copy_ic_bw: 0.50,
+  copy_full: 0.80,
+  scan_img: 0.50,
+  scan_word: 1.20,
+  scan_pdf: 0.30
+};
+
+/* ================================================================
+   APPLICATION STATE
+   ================================================================ */
+let transactions = [];
+let manualIncome = 0;
+let currentService = null;
+
+/* ================================================================
+   FIXED: SUPABASE API FUNCTIONS (using 'date' not 'created_at')
+   ================================================================ */
+async function loadTransactions() {
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/transactions?select=*&order=date.desc&limit=2000`,
+      { headers: HEADERS }
+    );
+    if (res.ok) {
+      const data = await res.json();
+      return Array.isArray(data) ? data : [];
+    }
+    console.warn('loadTransactions HTTP', res.status);
+    return null;
+  } catch (err) {
+    console.error('loadTransactions fetch error:', err);
+    return null;
+  }
+}
+
+async function saveTransaction(customer, service, amount) {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/transactions`, {
+      method: 'POST',
+      headers: POST_HEADERS,
+      body: JSON.stringify({
+        customer: customer,
+        service: service,
+        amount: parseFloat(amount),
+        date: new Date().toISOString()
+      })
+    });
+    if (!res.ok) {
+      const errText = await res.text();
+      console.error('saveTransaction error', res.status, errText);
+    }
+    return res.ok;
+  } catch (err) {
+    console.error('saveTransaction fetch error:', err);
+    return false;
+  }
+}
+
+/* ================================================================
+   FIXED: DASHBOARD COMPUTATIONS (using 'date' column)
+   ================================================================ */
+function todayStr() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function getTodayIncome() {
+  const t = todayStr();
+  const sum = transactions
+    .filter(tx => {
+      const d = tx.date ? tx.date.slice(0, 10) : '';
+      return d === t && !['Laminate', 'Binding'].includes(tx.service);
+    })
+    .reduce((s, tx) => s + parseFloat(tx.amount || 0), 0);
+  return sum + manualIncome;
+}
+
+function getLainIncome() {
+  const t = todayStr();
+  return transactions
+    .filter(tx => {
+      const d = tx.date ? tx.date.slice(0, 10) : '';
+      return d === t && ['Laminate', 'Binding'].includes(tx.service);
+    })
+    .reduce((s, tx) => s + parseFloat(tx.amount || 0), 0);
+}
+
+function getTodayCount() {
+  const t = todayStr();
+  return transactions.filter(tx => (tx.date || '').slice(0, 10) === t).length;
+}
+
+function updateDashboard() {
+  document.getElementById('statIncome').textContent = 'RM ' + getTodayIncome().toFixed(2);
+  document.getElementById('statLain').textContent = 'RM ' + getLainIncome().toFixed(2);
+  document.getElementById('statCount').textContent = getTodayCount();
+  const now = new Date().toLocaleTimeString('ms-MY');
+  document.getElementById('sbSync').textContent = 'Last sync: ' + now;
+  document.getElementById('syncLabel').textContent = 'Synced ' + now;
+}
+
+/* ================================================================
+   CLOCK
+   ================================================================ */
+function tickClock() {
+  document.getElementById('clock').textContent = new Date().toLocaleTimeString('ms-MY', { hour12: false });
+}
+setInterval(tickClock, 1000);
+tickClock();
+
+/* ================================================================
+   FIXED: CONNECTION TEST
+   ================================================================ */
+async function testConnection() {
+  const dot = document.getElementById('syncDot');
+  const label = document.getElementById('syncLabel');
+  const sbEl = document.getElementById('sbSync');
+
+  label.textContent = 'Connecting...';
+  dot.style.background = 'var(--amber)';
+
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/transactions?select=id&limit=1`,
+      { headers: HEADERS }
+    );
+
+    if (res.ok) {
+      dot.style.background = 'var(--green)';
+      label.textContent = 'Connected';
+      sbEl.textContent = 'Supabase Connected';
+      toast('Supabase berjaya disambungkan!', 'ok', 3000);
+      return true;
+    } else if (res.status === 401 || res.status === 403) {
+      dot.style.background = 'var(--rose)';
+      label.textContent = 'Auth Error';
+      sbEl.textContent = 'Auth Error ' + res.status;
+      toast('Ralat kebenaran Supabase (' + res.status + '). Semak anon key anda.', 'err', 8000);
+      return false;
+    } else if (res.status === 404) {
+      dot.style.background = 'var(--rose)';
+      label.textContent = 'Table Error';
+      sbEl.textContent = 'Table "transactions" tidak dijumpai';
+      toast('Table "transactions" tidak wujud dalam Supabase anda. Sila cipta table terlebih dahulu.', 'err', 10000);
+      return false;
+    } else {
+      dot.style.background = 'var(--rose)';
+      label.textContent = 'Error ' + res.status;
+      sbEl.textContent = 'DB Error ' + res.status;
+      toast('Supabase error: ' + res.status, 'err', 6000);
+      return false;
+    }
+  } catch (err) {
+    dot.style.background = 'var(--rose)';
+    label.textContent = 'Offline';
+    sbEl.textContent = 'No connection';
+    toast('Tiada sambungan internet atau URL Supabase tidak dapat dicapai.', 'err', 6000);
+    return false;
+  }
+}
+
+/* ================================================================
+   FIXED: AUTO REFRESH (using corrected loadTransactions)
+   ================================================================ */
+async function autoRefresh() {
+  const dot = document.getElementById('syncDot');
+  const data = await loadTransactions();
+  if (data !== null) {
+    transactions = data;
+    dot.style.background = 'var(--green)';
+    updateDashboard();
+  } else {
+    dot.style.background = 'var(--rose)';
+  }
+}
+
+/* Boot sequence */
+(async function boot() {
+  await testConnection();
+  await autoRefresh();
+})();
+
+setInterval(autoRefresh, 10000);
+
+/* ================================================================
+   MANUAL INCOME
+   ================================================================ */
+function updateManual() {
+  const val = parseFloat(document.getElementById('manualInput').value);
+  if (isNaN(val) || val < 0) {
+    toast('Nilai tidak sah! Masukkan nombor positif.', 'err');
+    return;
+  }
+  manualIncome = val;
+  updateDashboard();
+  toast('Manual Income dikemas kini: RM ' + val.toFixed(2), 'ok');
+}
+
+/* ================================================================
+   SERVICE MODAL
+   ================================================================ */
+function openModal(key, title) {
+  currentService = { key: key, title: title };
+  document.getElementById('modalTitle').textContent = title;
+  const unitPrice = PRICING[key] || 0;
+  document.getElementById('priceTag').innerHTML = '💰 Harga Unit: <strong>RM ' + unitPrice.toFixed(2) + '</strong>';
+  document.getElementById('fCustomer').value = '';
+  document.getElementById('fQty').value = '1';
+  document.getElementById('fPaid').value = '';
+  document.getElementById('resultBox').style.display = 'none';
+  const btn = document.getElementById('btnProcess');
+  btn.textContent = '⚡ PROSES TRANSAKSI';
+  btn.disabled = false;
+  document.getElementById('svcOverlay').classList.add('open');
+  setTimeout(function() { document.getElementById('fCustomer').focus(); }, 260);
+}
+
+function closeModal() {
+  document.getElementById('svcOverlay').classList.remove('open');
+  currentService = null;
+}
+
+function overlayBgClick(e, overlayId, closeFn) {
+  if (e.target === document.getElementById(overlayId)) closeFn();
+}
+
+function calcPreview() {
+  if (!currentService) return;
+  const key = currentService.key;
+  const qty = parseInt(document.getElementById('fQty').value) || 0;
+  const paid = parseFloat(document.getElementById('fPaid').value) || 0;
+  const box = document.getElementById('resultBox');
+
+  if (qty <= 0) { box.style.display = 'none'; return; }
+
+  const total = (key === 'binding') ? PRICING.binding : (PRICING[key] || 0) * qty;
+  const baki = paid - total;
+
+  document.getElementById('resTotal').textContent = 'RM ' + total.toFixed(2);
+  document.getElementById('resPaid').textContent = 'RM ' + paid.toFixed(2);
+  document.getElementById('resBaki').textContent = baki >= 0 ? 'RM ' + baki.toFixed(2) : '-RM ' + Math.abs(baki).toFixed(2);
+  document.getElementById('resBaki').style.color = baki >= 0 ? 'var(--green2)' : 'var(--rose)';
+  box.style.display = 'block';
+}
+
+async function processTransaction() {
+  if (!currentService) return;
+
+  const key = currentService.key;
+  const title = currentService.title;
+  const customer = document.getElementById('fCustomer').value.trim();
+  const qty = parseInt(document.getElementById('fQty').value);
+  const paid = parseFloat(document.getElementById('fPaid').value);
+
+  if (!customer) { toast('Sila masukkan nama pelanggan!', 'err'); return; }
+  if (!qty || qty <= 0) { toast('Kuantiti mesti lebih dari 0!', 'err'); return; }
+  if (!paid || paid <= 0) { toast('Jumlah bayaran tidak sah!', 'err'); return; }
+
+  const total = (key === 'binding') ? PRICING.binding : (PRICING[key] || 0) * qty;
+
+  if (paid < total) {
+    toast('Bayaran tidak cukup! Perlu: RM ' + total.toFixed(2), 'err');
+    return;
+  }
+
+  const btn = document.getElementById('btnProcess');
+  btn.textContent = 'Memproses...';
+  btn.disabled = true;
+
+  const ok = await saveTransaction(customer, title, total);
+
+  if (ok) {
+    const fresh = await loadTransactions();
+    if (fresh !== null) transactions = fresh;
+    updateDashboard();
+    const baki = paid - total;
+    toast(title + '\nJumlah: RM ' + total.toFixed(2) + ' | Baki: RM ' + baki.toFixed(2), 'ok', 4500);
+    closeModal();
+  } else {
+    toast('Gagal simpan ke Supabase. Semak sambungan internet dan pastikan table "transactions" wujud.', 'warn', 7000);
+    btn.textContent = '⚡ PROSES TRANSAKSI';
+    btn.disabled = false;
+  }
+}
+
+/* Keyboard shortcuts */
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeModal();
+    closeRpt();
+  }
+  if (e.key === 'Enter' && document.getElementById('svcOverlay').classList.contains('open') && document.activeElement.tagName !== 'BUTTON') {
+    processTransaction();
+  }
+});
+
+/* ================================================================
+   REPORT FUNCTIONS
+   ================================================================ */
+function todayLabel() {
+  return new Date().toLocaleDateString('ms-MY', { day: '2-digit', month: 'long', year: 'numeric' });
+}
+
+function fmtDate(iso) {
+  return new Date(iso).toLocaleDateString('ms-MY', { day: '2-digit', month: '2-digit', year: 'numeric' });
+}
+
+function fmtTime(iso) {
+  return new Date(iso).toLocaleTimeString('ms-MY', { hour: '2-digit', minute: '2-digit', hour12: false });
+}
+
+const MONTHS_MS = ['Januari', 'Februari', 'Mac', 'April', 'Mei', 'Jun', 'Julai', 'Ogos', 'September', 'Oktober', 'November', 'Disember'];
+
+function monthName(n) { return MONTHS_MS[n - 1] || ''; }
+function thisMonth() { return new Date().getMonth() + 1; }
+function thisYear() { return new Date().getFullYear(); }
+
+function openRpt(title, bodyHTML) {
+  document.getElementById('rptTitle').innerHTML = title;
+  document.getElementById('rptBody').innerHTML = bodyHTML;
+  document.getElementById('rptOverlay').classList.add('open');
+}
+
+function closeRpt() {
+  document.getElementById('rptOverlay').classList.remove('open');
+}
+
+function buildTable(txs, col1Label, col1Fn) {
+  if (!txs.length) return '<div class="rpt-empty">Tiada rekod dijumpai.</div>';
+  return '<table class="rpt-table"><thead><tr><th>' + col1Label + '</th><th>Pelanggan</th><th>Perkhidmatan</th><th>Jumlah</th></tr></thead><tbody>' +
+    txs.map(function(tx) {
+      return '<tr><td>' + col1Fn(tx.date) + '</td><td>' + esc(tx.customer) + '</td><td>' + esc(tx.service) + '</td><td class="amt">RM ' + parseFloat(tx.amount).toFixed(2) + '</td></tr>';
+    }).join('') + '</tbody></table>';
+}
+
+function monthlyReportPopup() {
+  const m = thisMonth(), y = thisYear();
+  const txs = transactions.filter(function(tx) {
+    const d = new Date(tx.date);
+    return d.getMonth() + 1 === m && d.getFullYear() === y;
+  });
+  const total = txs.reduce(function(s, tx) { return s + parseFloat(tx.amount || 0); }, 0);
+
+  openRpt('📊 Monthly Report — ' + monthName(m) + ' ' + y,
+    '<div class="rpt-meta">' +
+    '<span class="rpt-badge">📅 ' + monthName(m) + ' ' + y + '</span>' +
+    '<span class="rpt-badge">🆔 ' + txs.length + ' Transaksi</span>' +
+    '</div>' +
+    buildTable(txs, 'Tarikh', fmtDate) +
+    '<div class="rpt-total"><span>Jumlah Bulan Ini</span><span>RM ' + total.toFixed(2) + '</span></div>' +
+    '<button class="btn btn-rpt2" style="margin-top:14px" onclick="printReport(\'monthly\')">' +
+    '🖨️ &nbsp;Cetak / Simpan PDF</button>'
+  );
+}
+
+function dailyReportPDF() {
+  const t = todayStr();
+  const txs = transactions.filter(function(tx) { return (tx.date || '').slice(0, 10) === t; });
+  const total = txs.reduce(function(s, tx) { return s + parseFloat(tx.amount || 0); }, 0);
+
+  openRpt('📋 Daily Report — ' + todayLabel(),
+    '<div class="rpt-meta">' +
+    '<span class="rpt-badge">📅 ' + todayLabel() + '</span>' +
+    '<span class="rpt-badge">🆔 ' + txs.length + ' Transaksi</span>' +
+    '</div>' +
+    buildTable(txs, 'Masa', fmtTime) +
+    '<div class="rpt-total"><span>Jumlah Hari Ini</span><span>RM ' + total.toFixed(2) + '</span></div>' +
+    '<button class="btn btn-rpt2" style="margin-top:14px" onclick="printReport(\'daily\')">' +
+    '🖨️ &nbsp;Cetak / Simpan PDF</button>'
+  );
+}
+
+function monthlyReportPDF() {
+  monthlyReportPopup();
+}
+
+function printReport(type) {
+  const m = thisMonth(), y = thisYear(), t = todayStr();
+  let txs, heading, sub, col1, col1Fn;
+
+  if (type === 'daily') {
+    txs = transactions.filter(function(tx) { return (tx.date || '').slice(0, 10) === t; });
+    heading = 'DAILY REPORT';
+    sub = todayLabel();
+    col1 = 'Masa';
+    col1Fn = fmtTime;
+  } else {
+    txs = transactions.filter(function(tx) {
+      const d = new Date(tx.date);
+      return d.getMonth() + 1 === m && d.getFullYear() === y;
+    });
+    heading = 'MONTHLY REPORT';
+    sub = monthName(m) + ' ' + y;
+    col1 = 'Tarikh';
+    col1Fn = fmtDate;
+  }
+
+  const total = txs.reduce(function(s, tx) { return s + parseFloat(tx.amount || 0); }, 0);
+
+  const rows = txs.length ? txs.map(function(tx) {
+    return '<tr><td>' + col1Fn(tx.date) + '</td><td>' + esc(tx.customer) + '</td><td>' + esc(tx.service) + '</td><td style="text-align:right;font-family:monospace">RM ' + parseFloat(tx.amount).toFixed(2) + '</td></tr>';
+  }).join('') : '<tr><td colspan="4" style="text-align:center;padding:24px;color:#888">Tiada rekod.</td></tr>';
+
+  const html = '<!DOCTYPE html><html><head><meta charset="UTF-8">' +
+    '<title>EPSON BLUE — ' + heading + '</title><style>' +
+    'body{font-family:"Segoe UI",Arial,sans-serif;margin:0;background:#f0f6ff}' +
+    '.hdr{background:linear-gradient(135deg,#0c2d6b,#0ea5e9);color:#fff;padding:28px 40px;print-color-adjust:exact;-webkit-print-color-adjust:exact}' +
+    '.hdr h1{margin:0;font-size:22px;letter-spacing:2px}' +
+    '.hdr p{margin:6px 0 0;opacity:.8;font-size:13px}' +
+    '.body{padding:28px 40px}' +
+    '.meta{display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap}' +
+    '.badge{background:#ddeeff;border:1px solid #99c4e8;border-radius:16px;padding:3px 12px;font-size:11px;color:#0c2d6b}' +
+    'table{width:100%;border-collapse:collapse;font-size:13px}' +
+    'th{background:#0c2d6b;color:#fff;padding:10px 14px;text-align:left;font-size:11px;letter-spacing:1px;print-color-adjust:exact;-webkit-print-color-adjust:exact}' +
+    'td{padding:9px 14px;border-bottom:1px solid #cde}' +
+    'tr:nth-child(even) td{background:#e8f2ff}' +
+    '.total{display:flex;justify-content:space-between;align-items:center;background:#ddeeff;border:1px solid #99c4e8;border-radius:8px;padding:14px 18px;margin-top:18px;font-weight:700;font-size:16px}' +
+    '.total span{font-family:monospace;font-size:20px;color:#0c2d6b}' +
+    '@media print{.no-print{display:none}}' +
+    '</style></head><body>' +
+    '<div class="hdr"><h1>EPSON BLUE PRO MAX — ' + heading + '</h1>' +
+    '<p>' + sub + ' &nbsp;|&nbsp; ' + txs.length + ' Transaksi</p></div>' +
+    '<div class="body">' +
+    '<table><thead><tr><th>' + col1 + '</th><th>Pelanggan</th><th>Perkhidmatan</th><th style="text-align:right">Jumlah</th></tr></thead>' +
+    '<tbody>' + rows + '</tbody></table>' +
+    '<div class="total"><span>Jumlah ' + (type === 'daily' ? 'Hari Ini' : 'Bulan Ini') + '</span>' +
+    '<span>RM ' + total.toFixed(2) + '</span></div>' +
+    '</div>' +
+    '<script>window.onload=function(){window.print();}<\/script>' +
+    '</body></html>';
+
+  const w = window.open('', '_blank');
+  if (w) {
+    w.document.write(html);
+    w.document.close();
+  } else {
+    toast('Popup disekat oleh browser. Benarkan popup untuk mencetak PDF.', 'warn', 5000);
+  }
+}
+
+/* ================================================================
+   TOAST & XSS SANITISER
+   ================================================================ */
+function toast(msg, type, duration) {
+  type = type || 'info';
+  duration = duration || 3200;
+  var icons = { ok: '✅', err: '❌', warn: '⚠️', info: 'ℹ️' };
+  var container = document.getElementById('toasts');
+  var el = document.createElement('div');
+  el.className = 'toast t-' + type;
+  var lines = msg.split('\n');
+  el.innerHTML = '<div class="toast-ico">' + (icons[type] || icons.info) + '</div>' +
+    '<div class="toast-txt">' +
+    lines.map(function(l, i) {
+      return i === 0 ? '<div class="toast-title">' + esc(l) + '</div>' : '<div>' + esc(l) + '</div>';
+    }).join('') +
+    '</div>';
+  container.appendChild(el);
+  setTimeout(function() {
+    el.classList.add('out');
+    setTimeout(function() { el.remove(); }, 320);
+  }, duration);
+}
+
+function esc(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+</script>
+</body>
+</html>
