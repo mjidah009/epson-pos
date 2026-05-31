@@ -476,13 +476,13 @@ input::placeholder{color:var(--text-lo)}
 <body>
 <div class="app">
 
-  <!-- ═══════════════════ HEADER ═══════════════════ -->
+<!-- ═══════════════════ HEADER ═══════════════════ -->
   <header class="header">
     <div class="logo-area">
       <div class="logo-icon">🖨️</div>
       <div class="logo-text">
         <h1>EPSON BLUE PRO MAX</h1>
-        <div class="sub">CLOUD SYNC &nbsp;·&nbsp; POS MANAGEMENT SYSTEM</div>
+        <div class="sub">CLOUD SYNC  ·  POS MANAGEMENT SYSTEM</div>
       </div>
     </div>
     <div class="header-right">
@@ -494,10 +494,10 @@ input::placeholder{color:var(--text-lo)}
     </div>
   </header>
 
-  <!-- ═══════════════════ MAIN ═══════════════════ -->
+<!-- ═══════════════════ MAIN ═══════════════════ -->
   <main class="main">
 
-    <!-- STAT CARDS -->
+<!-- STAT CARDS -->
     <div class="stats-row">
       <div class="scard sc-blue">
         <div class="scard-icon">💰</div>
@@ -522,46 +522,46 @@ input::placeholder{color:var(--text-lo)}
       </div>
     </div>
 
-    <!-- MID ROW -->
+<!-- MID ROW -->
     <div class="mid-row">
 
-      <!-- Manual Income -->
+<!-- Manual Income -->
       <div class="panel">
-        <div class="panel-hdr">✏️ &nbsp;MANUAL INCOME</div>
+        <div class="panel-hdr">✏️  MANUAL INCOME</div>
         <div class="panel-body">
           <label class="field-lbl">Masukkan Manual Income (RM)</label>
           <input type="number" id="manualInput" placeholder="0.00" min="0" step="0.01" />
           <button class="btn btn-manual" onclick="updateManual()">
-            💰 &nbsp;UPDATE MANUAL INCOME
+            💰  UPDATE MANUAL INCOME
           </button>
         </div>
       </div>
 
-      <!-- Tools & Reports -->
+<!-- Tools & Reports -->
       <div class="panel">
-        <div class="panel-hdr">📊 &nbsp;TOOLS &amp; REPORTS</div>
+        <div class="panel-hdr">📊  TOOLS & REPORTS</div>
         <div class="panel-body">
           <button class="btn btn-rpt1" onclick="monthlyReportPopup()">
-            📊 &nbsp;Monthly Report (Popup)
+            📊  Monthly Report (Popup)
           </button>
           <button class="btn btn-rpt2" onclick="dailyReportPDF()">
-            📋 &nbsp;Daily Report Harian (PDF)
+            📋  Daily Report Harian (PDF)
           </button>
           <button class="btn btn-rpt3" onclick="monthlyReportPDF()">
-            📅 &nbsp;Monthly Report Bulanan (PDF)
+            📅  Monthly Report Bulanan (PDF)
           </button>
         </div>
       </div>
     </div>
 
-    <!-- DIVIDER -->
+<!-- DIVIDER -->
     <div class="divider"></div>
 
-    <!-- PRINTING -->
+<!-- PRINTING -->
     <div class="svc">
       <div class="svc-hdr">
         <div class="svc-bar blue"></div>
-        <div class="svc-name">🖨️ &nbsp;PRINTING</div>
+        <div class="svc-name">🖨️  PRINTING</div>
       </div>
       <div class="svc-grid grid-5">
         <button class="btn btn-print svc-btn" onclick="openModal('print_bw','Printing B/W')">Printing<br>B/W</button>
@@ -572,11 +572,11 @@ input::placeholder{color:var(--text-lo)}
       </div>
     </div>
 
-    <!-- PHOTOCOPY -->
+<!-- PHOTOCOPY -->
     <div class="svc">
       <div class="svc-hdr">
         <div class="svc-bar green"></div>
-        <div class="svc-name">📄 &nbsp;PHOTOCOPY</div>
+        <div class="svc-name">📄  PHOTOCOPY</div>
       </div>
       <div class="svc-grid grid-5">
         <button class="btn btn-copy svc-btn" onclick="openModal('copy_bw','Photocopy B/W')">Photocopy<br>B/W</button>
@@ -587,11 +587,11 @@ input::placeholder{color:var(--text-lo)}
       </div>
     </div>
 
-    <!-- SCAN -->
+<!-- SCAN -->
     <div class="svc">
       <div class="svc-hdr">
         <div class="svc-bar amber"></div>
-        <div class="svc-name">🔍 &nbsp;SCAN</div>
+        <div class="svc-name">🔍  SCAN</div>
       </div>
       <div class="svc-grid grid-3">
         <button class="btn btn-scan svc-btn" onclick="openModal('scan_img','Scan Image')">Scan Image</button>
@@ -600,11 +600,11 @@ input::placeholder{color:var(--text-lo)}
       </div>
     </div>
 
-    <!-- LAMINATE & BINDING -->
+<!-- LAMINATE & BINDING -->
     <div class="svc">
       <div class="svc-hdr">
         <div class="svc-bar rose"></div>
-        <div class="svc-name">📎 &nbsp;LAMINATE &amp; BINDING</div>
+        <div class="svc-name">📎  LAMINATE & BINDING</div>
       </div>
       <div class="svc-grid grid-2">
         <button class="btn btn-lain svc-btn" onclick="openModal('laminate','Laminate')">Laminate</button>
@@ -612,11 +612,11 @@ input::placeholder{color:var(--text-lo)}
       </div>
     </div>
 
-  </main>
+</main>
 
-  <!-- ═══════════════════ STATUS BAR ═══════════════════ -->
+<!-- ═══════════════════ STATUS BAR ═══════════════════ -->
   <footer class="statusbar">
-    <span>EPSON BLUE PRO MAX &nbsp;·&nbsp; v3.0 &nbsp;·&nbsp; Supabase Cloud Edition</span>
+    <span>EPSON BLUE PRO MAX  ·  v3.0  ·  Supabase Cloud Edition</span>
     <div style="display:flex;gap:18px;align-items:center">
       <span id="sbSync">Last sync: —</span>
       <span class="sb-live"><div class="sb-dot"></div>LIVE</span>
@@ -645,7 +645,7 @@ input::placeholder{color:var(--text-lo)}
         <div class="result-row"><span>💰 Baki:</span><span id="resBaki">—</span></div>
       </div>
       <button class="btn btn-process" id="btnProcess" onclick="processTransaction()">
-        ⚡ &nbsp;PROSES TRANSAKSI
+        ⚡  PROSES TRANSAKSI
       </button>
     </div>
   </div>
@@ -1030,24 +1030,429 @@ function buildTable(txs, col1Label, col1Fn) {
     }).join('') + '</tbody></table>';
 }
 
-function monthlyReportPopup() {
-  const m = thisMonth(), y = thisYear();
-  const txs = transactions.filter(function(tx) {
-    const d = new Date(tx.date);
-    return d.getMonth() + 1 === m && d.getFullYear() === y;
-  });
-  const total = txs.reduce(function(s, tx) { return s + parseFloat(tx.amount || 0); }, 0);
+// ==================== REPORT FUNCTIONS (DIPERBAIKI) ====================
 
-  openRpt('📊 Monthly Report — ' + monthName(m) + ' ' + y,
-    '<div class="rpt-meta">' +
-    '<span class="rpt-badge">📅 ' + monthName(m) + ' ' + y + '</span>' +
-    '<span class="rpt-badge">🆔 ' + txs.length + ' Transaksi</span>' +
-    '</div>' +
-    buildTable(txs, 'Tarikh', fmtDate) +
-    '<div class="rpt-total"><span>Jumlah Bulan Ini</span><span>RM ' + total.toFixed(2) + '</span></div>' +
-    '<button class="btn btn-rpt2" style="margin-top:14px" onclick="printReport(\'monthly\')">' +
-    '🖨️ &nbsp;Cetak / Simpan PDF</button>'
-  );
+function monthlyReportPopup() {
+    const months = ['Januari', 'Februari', 'Mac', 'April', 'Mei', 'Jun', 'Julai', 'Ogos', 'September', 'Oktober', 'November', 'Disember'];
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth();
+    
+    // Bina dropdown
+    let selectHtml = '<select id="monthSelect" style="background:#1E2A4A; border:1px solid #3B4A6F; border-radius:40px; padding:8px 16px; color:white; cursor:pointer;">';
+    for(let i = 0; i < months.length; i++) {
+        let selected = (i === currentMonth) ? 'selected' : '';
+        selectHtml += `<option value="${i}">${months[i]} ${currentYear}</option>`;
+    }
+    selectHtml += '</select>';
+    
+    // Bina modal
+    const modalDiv = document.createElement('div');
+    modalDiv.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; z-index:1000;';
+    modalDiv.innerHTML = `
+        <div style="background:#0F172F; border-radius:28px; max-width:800px; width:90%; max-height:85vh; overflow-y:auto; padding:24px; border:1px solid #2D4A7C;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:10px;">
+                <h3 style="margin:0;">📆 Laporan Bulanan</h3>
+                ${selectHtml}
+            </div>
+            <div id="reportContent" style="min-height:200px;">
+                <div style="text-align:center; padding:40px;">📊 Pilih bulan untuk lihat laporan...</div>
+            </div>
+            <button style="margin-top:20px; background:rgba(255,255,255,0.1); border:1px solid #3B4A6F; border-radius:40px; padding:10px 24px; color:white; cursor:pointer;" onclick="this.closest('div').parentElement.remove()">Tutup</button>
+        </div>
+    `;
+    document.body.appendChild(modalDiv);
+    
+    // Fungsi untuk refresh laporan - GUNAKAN 'transactions' BUKAN 'allTransactions'
+    function refreshReport() {
+        const monthSelect = document.getElementById('monthSelect');
+        if(!monthSelect) return;
+        
+        const selectedMonth = parseInt(monthSelect.value);
+        const monthName = months[selectedMonth];
+        const year = currentYear;
+        
+        // GUNAKAN 'transactions' - ini nama pembolehubah yang betul
+        const transactionData = typeof transactions !== 'undefined' ? transactions : [];
+        
+        console.log('Jumlah transaksi:', transactionData.length);
+        
+        // Tapis transaksi
+        const filtered = transactionData.filter(t => {
+            if(!t || !t.date) return false;
+            const d = new Date(t.date);
+            return d.getMonth() === selectedMonth && d.getFullYear() === year;
+        });
+        
+        console.log('Transaksi untuk bulan ini:', filtered.length);
+        
+        const total = filtered.reduce((s, t) => s + (parseFloat(t.amount) || 0), 0);
+        
+        // Bina jadual
+        let tableRows = '';
+        if(filtered.length > 0) {
+            for(let i = 0; i < filtered.length; i++) {
+                const t = filtered[i];
+                tableRows += `
+                    <tr style="border-bottom:1px solid #2A3A60;">
+                        <td style="padding:10px;">${new Date(t.date).toLocaleDateString('ms-MY')}</td>
+                        <td style="padding:10px;">${escapeHtml(t.customer)}</td>
+                        <td style="padding:10px;">${escapeHtml(t.service)}</td>
+                        <td style="padding:10px; text-align:right;">RM ${parseFloat(t.amount).toFixed(2)}</td>
+                    </tr>
+                `;
+            }
+        } else {
+            tableRows = `<tr><td colspan="4" style="padding:40px; text-align:center;">📭 Tiada rekod untuk ${monthName} ${year}</td></tr>`;
+        }
+        
+        const reportContent = document.getElementById('reportContent');
+        if(reportContent) {
+            reportContent.innerHTML = `
+                <h4 style="margin:0 0 15px 0;">📊 ${monthName} ${year}</h4>
+                <div style="overflow-x:auto;">
+                    <table style="width:100%; border-collapse:collapse;">
+                        <thead>
+                            <tr style="background:#1E2A4A;">
+                                <th style="padding:10px; text-align:left;">Tarikh</th>
+                                <th style="padding:10px; text-align:left;">Pelanggan</th>
+                                <th style="padding:10px; text-align:left;">Perkhidmatan</th>
+                                <th style="padding:10px; text-align:left;">Jumlah (RM)</th>
+                            </tr>
+                        </thead>
+                        <tbody>${tableRows}</tbody>
+                        <tfoot>
+                            <tr style="background:#1E2A4A; font-weight:bold;">
+                                <td colspan="3" style="padding:12px;">Jumlah Keseluruhan</td>
+                                <td style="padding:12px; text-align:right;">RM ${total.toFixed(2)}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <button style="margin-top:20px; background:#0EA5E9; border:none; border-radius:40px; padding:10px 20px; color:white; cursor:pointer;" onclick="printMonthReport(${selectedMonth}, ${year}, '${monthName}')">🖨️ Cetak PDF Bulanan</button>
+            `;
+        }
+    }
+    
+    // Event listener untuk dropdown
+    const monthSelect = document.getElementById('monthSelect');
+    if(monthSelect) {
+        monthSelect.addEventListener('change', refreshReport);
+    }
+    
+    // Muat laporan pertama
+    refreshReport();
+    
+    // Tutup bila klik luar
+    modalDiv.addEventListener('click', (e) => {
+        if(e.target === modalDiv) modalDiv.remove();
+    });
+}
+
+// Fungsi untuk cetak PDF
+function printMonthReport(monthIndex, year, monthName) {
+    // GUNAKAN 'transactions'
+    const transactionData = typeof transactions !== 'undefined' ? transactions : [];
+    
+    const filtered = transactionData.filter(t => {
+        if(!t || !t.date) return false;
+        const d = new Date(t.date);
+        return d.getMonth() === monthIndex && d.getFullYear() === year;
+    });
+    
+    const total = filtered.reduce((s, t) => s + (parseFloat(t.amount) || 0), 0);
+    
+    let rows = '';
+    if(filtered.length > 0) {
+        rows = filtered.map(t => `
+            <tr>
+                <td style="padding:8px; border-bottom:1px solid #ccc;">${new Date(t.date).toLocaleDateString('ms-MY')}</td>
+                <td style="padding:8px; border-bottom:1px solid #ccc;">${escapeHtml(t.customer)}</td>
+                <td style="padding:8px; border-bottom:1px solid #ccc;">${escapeHtml(t.service)}</td>
+                <td style="padding:8px; border-bottom:1px solid #ccc; text-align:right;">RM ${parseFloat(t.amount).toFixed(2)}</td>
+            </tr>
+        `).join('');
+    } else {
+        rows = '<tr><td colspan="4" style="padding:20px; text-align:center;">Tiada rekod transaksi</td></tr>';
+    }
+    
+    const printWindow = window.open('', '_blank');
+    if(!printWindow) {
+        alert('Popup disekat! Sila benarkan popup untuk cetak PDF.');
+        return;
+    }
+    
+    printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Laporan Bulanan - ${monthName} ${year}</title>
+            <style>
+                * { margin: 0; padding: 0; box-sizing: border-box; }
+                body { font-family: 'Segoe UI', Arial, sans-serif; padding: 30px; background: white; }
+                .header { text-align: center; margin-bottom: 30px; }
+                .header h1 { color: #0EA5E9; margin-bottom: 8px; }
+                .header p { color: #555; font-size: 14px; }
+                table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+                th { background: #0EA5E9; color: white; padding: 12px; text-align: left; }
+                td { padding: 10px; border-bottom: 1px solid #ddd; }
+                .total { margin-top: 20px; text-align: right; font-size: 18px; font-weight: bold; }
+                .footer { margin-top: 40px; text-align: center; font-size: 11px; color: #999; }
+                @media print {
+                    body { padding: 20px; }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>🖨️ EPSON BLUE PRO MAX</h1>
+                <h2>Laporan Bulanan - ${monthName} ${year}</h2>
+                <p>Dijana pada: ${new Date().toLocaleString('ms-MY')} | Jumlah Transaksi: ${filtered.length}</p>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tarikh</th>
+                        <th>Pelanggan</th>
+                        <th>Perkhidmatan</th>
+                        <th>Jumlah (RM)</th>
+                    </tr>
+                </thead>
+                <tbody>${rows}</tbody>
+            </table>
+            <div class="total">Jumlah Keseluruhan: RM ${total.toFixed(2)}</div>
+            <div class="footer">EPSON BLUE PRO MAX - Sistem Pengurusan POS</div>
+            <script>
+                window.onload = function() {
+                    window.print();
+                    setTimeout(function() { window.close(); }, 1000);
+                };
+            <\/script>
+        </body>
+        </html>
+    `);
+    printWindow.document.close();
+}
+
+// ==================== FUNGSI ASAL UNTUK PDF HARIAN ====================
+
+function dailyReportPDF() {
+    const todayStr = getTodayDateStr();
+    const filtered = allTransactions.filter(t => (t.date || '').slice(0,10) === todayStr);
+    generatePDFReport(filtered, 'LAPORAN HARIAN', new Date().toLocaleDateString('ms-MY'));
+}
+
+function monthlyReportPDF() {
+    const months = ['Januari', 'Februari', 'Mac', 'April', 'Mei', 'Jun', 'Julai', 'Ogos', 'September', 'Oktober', 'November', 'Disember'];
+    const currentYear = new Date().getFullYear();
+    
+    // Kumpul data untuk semua bulan Jan - Dis dalam tahun semasa
+    let allMonthsData = [];
+    let grandTotal = 0;
+    
+    for(let i = 0; i < months.length; i++) {
+        const monthIndex = i;
+        const monthName = months[i];
+        
+        // Tapis transaksi untuk bulan ini
+        const filtered = transactions.filter(t => {
+            if(!t || !t.date) return false;
+            const d = new Date(t.date);
+            return !isNaN(d.getTime()) && d.getMonth() === monthIndex && d.getFullYear() === currentYear;
+        });
+        
+        const monthlyTotal = filtered.reduce((s, t) => s + (parseFloat(t.amount) || 0), 0);
+        grandTotal += monthlyTotal;
+        
+        allMonthsData.push({
+            monthName: monthName,
+            monthIndex: monthIndex,
+            transactions: filtered,
+            total: monthlyTotal,
+            count: filtered.length
+        });
+    }
+    
+    // Bina jadual untuk semua bulan
+    let allRows = '';
+    
+    for(let i = 0; i < allMonthsData.length; i++) {
+        const monthData = allMonthsData[i];
+        
+        if(monthData.transactions.length > 0) {
+            // Header bulan
+            allRows += `
+                <tr style="background:#1E2A4A;">
+                    <td colspan="4" style="padding:12px; font-weight:bold; font-size:14px;">
+                        📅 ${monthData.monthName} ${currentYear} (${monthData.count} transaksi) - Jumlah: RM ${monthData.total.toFixed(2)}
+                    </td>
+                 </tr>
+            `;
+            
+            // Transaksi dalam bulan tersebut
+            for(let j = 0; j < monthData.transactions.length; j++) {
+                const t = monthData.transactions[j];
+                allRows += `
+                    <tr style="border-bottom:1px solid #2A3A60;">
+                        <td style="padding:8px 8px 8px 20px;">${new Date(t.date).toLocaleDateString('ms-MY')}</td>
+                        <td style="padding:8px;">${escapeHtml(t.customer || '')}</td>
+                        <td style="padding:8px;">${escapeHtml(t.service || '')}</td>
+                        <td style="padding:8px; text-align:right;">RM ${parseFloat(t.amount || 0).toFixed(2)}<\/td>
+                      </tr>
+                `;
+            }
+        } else {
+            // Bulan tiada transaksi
+            allRows += `
+                <tr style="border-bottom:1px solid #2A3A60;">
+                    <td colspan="4" style="padding:12px 8px 12px 20px; color:#7E8BA5;">
+                        📭 ${monthData.monthName} ${currentYear} - Tiada rekod transaksi
+                     </td>
+                  </tr>
+            `;
+        }
+    }
+    
+    // Cipta tetingkap cetak PDF
+    const printWindow = window.open('', '_blank');
+    if(!printWindow) {
+        alert('Popup disekat! Sila benarkan popup untuk cetak PDF.');
+        return;
+    }
+    
+    printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Laporan Tahunan EPSON - ${currentYear}</title>
+            <style>
+                * { margin: 0; padding: 0; box-sizing: border-box; }
+                body { 
+                    font-family: 'Segoe UI', Arial, sans-serif; 
+                    padding: 30px; 
+                    background: white; 
+                }
+                .header { 
+                    text-align: center; 
+                    margin-bottom: 30px; 
+                    padding-bottom: 20px;
+                    border-bottom: 2px solid #0EA5E9;
+                }
+                .header h1 { 
+                    color: #0EA5E9; 
+                    margin-bottom: 8px; 
+                    font-size: 24px;
+                }
+                .header h2 { 
+                    color: #333; 
+                    margin-bottom: 10px;
+                    font-size: 18px;
+                }
+                .header p { 
+                    color: #555; 
+                    font-size: 13px; 
+                }
+                .summary {
+                    background: #F0F6FF;
+                    padding: 15px;
+                    border-radius: 10px;
+                    margin-bottom: 25px;
+                    text-align: center;
+                }
+                .summary .grand-total {
+                    font-size: 22px;
+                    font-weight: bold;
+                    color: #0EA5E9;
+                }
+                table { 
+                    width: 100%; 
+                    border-collapse: collapse; 
+                    margin-top: 10px; 
+                }
+                th { 
+                    background: #0EA5E9; 
+                    color: white; 
+                    padding: 12px; 
+                    text-align: left; 
+                }
+                td { 
+                    padding: 10px; 
+                    border-bottom: 1px solid #ddd; 
+                }
+                .grand-total-footer {
+                    margin-top: 25px;
+                    padding: 15px;
+                    background: #0EA5E9;
+                    color: white;
+                    text-align: right;
+                    font-size: 18px;
+                    font-weight: bold;
+                    border-radius: 8px;
+                }
+                .footer { 
+                    margin-top: 30px; 
+                    text-align: center; 
+                    font-size: 11px; 
+                    color: #999; 
+                    padding-top: 20px;
+                    border-top: 1px solid #ddd;
+                }
+                @media print {
+                    body { padding: 20px; }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>🖨️ EPSON BLUE PRO MAX</h1>
+                <h2>LAPORAN TAHUNAN ${currentYear}</h2>
+                <p>(Januari - Disember)</p>
+                <p>Dijana pada: ${new Date().toLocaleString('ms-MY')}</p>
+            </div>
+            
+            <div class="summary">
+                <div>📊 RINGKASAN TAHUNAN</div>
+                <div class="grand-total">Jumlah Keseluruhan Tahun ${currentYear}: RM ${grandTotal.toFixed(2)}<\/div>
+                <div style="margin-top:8px;">Jumlah Transaksi: ${transactions.filter(t => {
+                    if(!t || !t.date) return false;
+                    const d = new Date(t.date);
+                    return !isNaN(d.getTime()) && d.getFullYear() === currentYear;
+                }).length} transaksi</div>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:15%;">Tarikh</th>
+                        <th style="width:25%;">Pelanggan</th>
+                        <th style="width:35%;">Perkhidmatan</th>
+                        <th style="width:25%; text-align:right;">Jumlah (RM)</th>
+                     </tr>
+                </thead>
+                <tbody>
+                    ${allRows}
+                </tbody>
+            </table>
+            
+            <div class="grand-total-footer">
+                🏆 JUMLAH KESELURUHAN TAHUN ${currentYear}: RM ${grandTotal.toFixed(2)}
+            </div>
+            
+            <div class="footer">
+                EPSON BLUE PRO MAX - Sistem Pengurusan POS | Laporan Dijana Secara Digital
+            </div>
+            
+            <script>
+                window.onload = function() {
+                    window.print();
+                    setTimeout(function() { window.close(); }, 1000);
+                };
+            <\/script>
+        </body>
+        </html>
+    `);
+    printWindow.document.close();
 }
 function dailyReportPDF() {
   const t = todayStr();
@@ -1067,7 +1472,216 @@ function dailyReportPDF() {
 }
 
 function monthlyReportPDF() {
-  monthlyReportPopup();
+    const months = ['Januari', 'Februari', 'Mac', 'April', 'Mei', 'Jun', 'Julai', 'Ogos', 'September', 'Oktober', 'November', 'Disember'];
+    const currentYear = new Date().getFullYear();
+    
+    // Kumpul data untuk semua bulan Jan - Dis dalam tahun semasa
+    let allMonthsData = [];
+    let grandTotal = 0;
+    
+    for(let i = 0; i < months.length; i++) {
+        const monthIndex = i;
+        const monthName = months[i];
+        
+        // Tapis transaksi untuk bulan ini
+        const filtered = transactions.filter(t => {
+            if(!t || !t.date) return false;
+            const d = new Date(t.date);
+            return !isNaN(d.getTime()) && d.getMonth() === monthIndex && d.getFullYear() === currentYear;
+        });
+        
+        const monthlyTotal = filtered.reduce((s, t) => s + (parseFloat(t.amount) || 0), 0);
+        grandTotal += monthlyTotal;
+        
+        allMonthsData.push({
+            monthName: monthName,
+            monthIndex: monthIndex,
+            transactions: filtered,
+            total: monthlyTotal,
+            count: filtered.length
+        });
+    }
+    
+    // Bina jadual untuk semua bulan
+    let allRows = '';
+    
+    for(let i = 0; i < allMonthsData.length; i++) {
+        const monthData = allMonthsData[i];
+        
+        if(monthData.transactions.length > 0) {
+            // Header bulan
+            allRows += `
+                <tr style="background:#1E2A4A;">
+                    <td colspan="4" style="padding:12px; font-weight:bold; font-size:14px;">
+                        📅 ${monthData.monthName} ${currentYear} (${monthData.count} transaksi) - Jumlah: RM ${monthData.total.toFixed(2)}
+                    </td>
+                 </tr>
+            `;
+            
+            // Transaksi dalam bulan tersebut
+            for(let j = 0; j < monthData.transactions.length; j++) {
+                const t = monthData.transactions[j];
+                allRows += `
+                    <tr style="border-bottom:1px solid #2A3A60;">
+                        <td style="padding:8px 8px 8px 20px;">${new Date(t.date).toLocaleDateString('ms-MY')}</td>
+                        <td style="padding:8px;">${escapeHtml(t.customer || '')}</td>
+                        <td style="padding:8px;">${escapeHtml(t.service || '')}</td>
+                        <td style="padding:8px; text-align:right;">RM ${parseFloat(t.amount || 0).toFixed(2)}<\/td>
+                      </tr>
+                `;
+            }
+        } else {
+            // Bulan tiada transaksi
+            allRows += `
+                <tr style="border-bottom:1px solid #2A3A60;">
+                    <td colspan="4" style="padding:12px 8px 12px 20px; color:#7E8BA5;">
+                        📭 ${monthData.monthName} ${currentYear} - Tiada rekod transaksi
+                     </td>
+                  </tr>
+            `;
+        }
+    }
+    
+    // Cipta tetingkap cetak PDF
+    const printWindow = window.open('', '_blank');
+    if(!printWindow) {
+        alert('Popup disekat! Sila benarkan popup untuk cetak PDF.');
+        return;
+    }
+    
+    printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Laporan Tahunan EPSON - ${currentYear}</title>
+            <style>
+                * { margin: 0; padding: 0; box-sizing: border-box; }
+                body { 
+                    font-family: 'Segoe UI', Arial, sans-serif; 
+                    padding: 30px; 
+                    background: white; 
+                }
+                .header { 
+                    text-align: center; 
+                    margin-bottom: 30px; 
+                    padding-bottom: 20px;
+                    border-bottom: 2px solid #0EA5E9;
+                }
+                .header h1 { 
+                    color: #0EA5E9; 
+                    margin-bottom: 8px; 
+                    font-size: 24px;
+                }
+                .header h2 { 
+                    color: #333; 
+                    margin-bottom: 10px;
+                    font-size: 18px;
+                }
+                .header p { 
+                    color: #555; 
+                    font-size: 13px; 
+                }
+                .summary {
+                    background: #F0F6FF;
+                    padding: 15px;
+                    border-radius: 10px;
+                    margin-bottom: 25px;
+                    text-align: center;
+                }
+                .summary .grand-total {
+                    font-size: 22px;
+                    font-weight: bold;
+                    color: #0EA5E9;
+                }
+                table { 
+                    width: 100%; 
+                    border-collapse: collapse; 
+                    margin-top: 10px; 
+                }
+                th { 
+                    background: #0EA5E9; 
+                    color: white; 
+                    padding: 12px; 
+                    text-align: left; 
+                }
+                td { 
+                    padding: 10px; 
+                    border-bottom: 1px solid #ddd; 
+                }
+                .grand-total-footer {
+                    margin-top: 25px;
+                    padding: 15px;
+                    background: #0EA5E9;
+                    color: white;
+                    text-align: right;
+                    font-size: 18px;
+                    font-weight: bold;
+                    border-radius: 8px;
+                }
+                .footer { 
+                    margin-top: 30px; 
+                    text-align: center; 
+                    font-size: 11px; 
+                    color: #999; 
+                    padding-top: 20px;
+                    border-top: 1px solid #ddd;
+                }
+                @media print {
+                    body { padding: 20px; }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>🖨️ EPSON BLUE PRO MAX</h1>
+                <h2>LAPORAN TAHUNAN ${currentYear}</h2>
+                <p>(Januari - Disember)</p>
+                <p>Dijana pada: ${new Date().toLocaleString('ms-MY')}</p>
+            </div>
+            
+            <div class="summary">
+                <div>📊 RINGKASAN TAHUNAN</div>
+                <div class="grand-total">Jumlah Keseluruhan Tahun ${currentYear}: RM ${grandTotal.toFixed(2)}<\/div>
+                <div style="margin-top:8px;">Jumlah Transaksi: ${transactions.filter(t => {
+                    if(!t || !t.date) return false;
+                    const d = new Date(t.date);
+                    return !isNaN(d.getTime()) && d.getFullYear() === currentYear;
+                }).length} transaksi</div>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:15%;">Tarikh</th>
+                        <th style="width:25%;">Pelanggan</th>
+                        <th style="width:35%;">Perkhidmatan</th>
+                        <th style="width:25%; text-align:right;">Jumlah (RM)</th>
+                     </tr>
+                </thead>
+                <tbody>
+                    ${allRows}
+                </tbody>
+            </table>
+            
+            <div class="grand-total-footer">
+                🏆 JUMLAH KESELURUHAN TAHUN ${currentYear}: RM ${grandTotal.toFixed(2)}
+            </div>
+            
+            <div class="footer">
+                EPSON BLUE PRO MAX - Sistem Pengurusan POS | Laporan Dijana Secara Digital
+            </div>
+            
+            <script>
+                window.onload = function() {
+                    window.print();
+                    setTimeout(function() { window.close(); }, 1000);
+                };
+            <\/script>
+        </body>
+        </html>
+    `);
+    printWindow.document.close();
 }
 
 function printReport(type) {
@@ -1137,6 +1751,10 @@ function printReport(type) {
 /* ================================================================
    TOAST & XSS SANITISER
    ================================================================ */
+function escapeHtml(str) {
+    if(!str) return '';
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
 function toast(msg, type, duration) {
   type = type || 'info';
   duration = duration || 3200;
