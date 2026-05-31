@@ -1030,97 +1030,24 @@ function buildTable(txs, col1Label, col1Fn) {
     }).join('') + '</tbody></table>';
 }
 
-// ==================== REPORT DENGAN DROPDOWN BULAN ====================
-
-let currentReportMonth = new Date().getMonth() + 1;
-let currentReportYear = new Date().getFullYear();
-
 function monthlyReportPopup() {
-    const months = ['Januari', 'Februari', 'Mac', 'April', 'Mei', 'Jun', 'Julai', 'Ogos', 'September', 'Oktober', 'November', 'Disember'];
-    const currentMonth = new Date().getMonth();
-    
-    let selectHtml = '<select id="monthSelect" style="background:#1E2A4A; border:1px solid #3B4A6F; border-radius:40px; padding:8px 16px; color:white; margin-left:10px;">';
-    for(let i = 0; i < months.length; i++) {
-        let selected = (i === currentMonth) ? 'selected' : '';
-        selectHtml += `<option value="${i+1}" ${selected}>${months[i]} ${currentReportYear}</option>`;
-    }
-    selectHtml += '</select>';
-    
-    let html = `
-        <div style="padding:0;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:10px;">
-                <h3>📆 Laporan Bulanan</h3>
-                ${selectHtml}
-            </div>
-            <div id="reportContent">Memuatkan...</div>
-        </div>
-    `;
-    
-    let modalDiv = document.createElement('div');
-    modalDiv.className = 'modal active';
-    modalDiv.style.display = 'flex';
-    modalDiv.innerHTML = `<div class="modal-content" style="max-width:700px; max-height:80vh; overflow-y:auto;">${html}<button class="btn-outline" style="margin-top:16px;" onclick="this.closest('.modal').remove()">Tutup</button></div>`;
-    document.body.appendChild(modalDiv);
-    
-    const updateReport = () => {
-        let month = parseInt(document.getElementById('monthSelect').value);
-        let year = currentReportYear;
-        let filtered = allTransactions.filter(t => {
-            let d = new Date(t.date);
-            return d.getMonth() + 1 === month && d.getFullYear() === year;
-        });
-        let total = filtered.reduce((s,t) => s + parseFloat(t.amount||0), 0);
-        let monthName = months[month-1];
-        
-        let rows = filtered.length ? filtered.map(t => `
-            <tr style="border-bottom:1px solid #2A3A60;">
-                <td style="padding:8px;">${new Date(t.date).toLocaleDateString()}</td>
-                <td style="padding:8px;">${escapeHtml(t.customer)}</td>
-                <td style="padding:8px;">${escapeHtml(t.service)}</td>
-                <td style="padding:8px; text-align:right;">RM ${parseFloat(t.amount).toFixed(2)}</td>
-            </tr>
-        `).join('') : '<tr><td colspan="4" style="padding:20px; text-align:center;">Tiada rekod</td></tr>';
-        
-        document.getElementById('reportContent').innerHTML = `
-            <h4>📊 ${monthName} ${year}</h4>
-            <table style="width:100%; border-collapse:collapse;">
-                <thead><tr style="background:#1E2A4A;"><th style="padding:8px;">Tarikh</th><th>Pelanggan</th><th>Perkhidmatan</th><th>Jumlah</th></tr></thead>
-                <tbody>${rows}</tbody>
-                <tfoot><tr style="background:#1E2A4A; font-weight:bold;"><td colspan="3" style="padding:10px;">Jumlah</td><td style="text-align:right;">RM ${total.toFixed(2)}</td></tr></tfoot>
-            </table>
-            <button class="btn-outline" style="margin-top:16px;" onclick="printMonthReport(${month}, ${year}, '${monthName}')">🖨️ Cetak PDF</button>
-        `;
-    };
-    
-    document.getElementById('monthSelect').addEventListener('change', updateReport);
-    updateReport();
-    
-    modalDiv.onclick = (e) => { if(e.target === modalDiv) modalDiv.remove(); };
-    modalDiv.querySelector('.modal-content').addEventListener('click', (e) => e.stopPropagation());
-}
+  const m = thisMonth(), y = thisYear();
+  const txs = transactions.filter(function(tx) {
+    const d = new Date(tx.date);
+    return d.getMonth() + 1 === m && d.getFullYear() === y;
+  });
+  const total = txs.reduce(function(s, tx) { return s + parseFloat(tx.amount || 0); }, 0);
 
-function printMonthReport(month, year, monthName) {
-    let filtered = allTransactions.filter(t => {
-        let d = new Date(t.date);
-        return d.getMonth() + 1 === month && d.getFullYear() === year;
-    });
-    let total = filtered.reduce((s,t) => s + parseFloat(t.amount||0), 0);
-    let rows = filtered.map(t => `
-        <tr><td>${new Date(t.date).toLocaleDateString()}</td><td>${escapeHtml(t.customer)}</td><td>${escapeHtml(t.service)}</td><td style="text-align:right">RM ${parseFloat(t.amount).toFixed(2)}</td></tr>
-    `).join('');
-    
-    let win = window.open('', '_blank');
-    win.document.write(`
-        <html><head><title>Laporan ${monthName} ${year}</title>
-        <style>body{font-family:Arial;padding:30px} table{width:100%;border-collapse:collapse} th,td{padding:8px;border-bottom:1px solid #ccc} .total{font-weight:bold;margin-top:20px;text-align:right}</style>
-        </head><body>
-        <h1>EPSON BLUE PRO MAX</h1><h2>Laporan Bulanan - ${monthName} ${year}</h2>
-        <table><thead><tr><th>Tarikh</th><th>Pelanggan</th><th>Perkhidmatan</th><th>Jumlah</th></tr></thead><tbody>${rows}</tbody></table>
-        <div class="total">Jumlah: RM ${total.toFixed(2)}</div>
-        <script>window.onload=function(){window.print();setTimeout(()=>window.close(),500)}<\/script>
-        </body></html>
-    `);
-    win.document.close();
+  openRpt('📊 Monthly Report — ' + monthName(m) + ' ' + y,
+    '<div class="rpt-meta">' +
+    '<span class="rpt-badge">📅 ' + monthName(m) + ' ' + y + '</span>' +
+    '<span class="rpt-badge">🆔 ' + txs.length + ' Transaksi</span>' +
+    '</div>' +
+    buildTable(txs, 'Tarikh', fmtDate) +
+    '<div class="rpt-total"><span>Jumlah Bulan Ini</span><span>RM ' + total.toFixed(2) + '</span></div>' +
+    '<button class="btn btn-rpt2" style="margin-top:14px" onclick="printReport(\'monthly\')">' +
+    '🖨️ &nbsp;Cetak / Simpan PDF</button>'
+  );
 }
 
 function dailyReportPDF() {
